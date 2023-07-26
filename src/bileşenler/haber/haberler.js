@@ -103,15 +103,80 @@ const data = [
 
     <button class="expandButton">+</button>
   </div>
+*/
 
+function haberYapici(date, title, p1, p2, p3) {
+  const div1 = document.createElement("div");
+  div1.setAttribute("class", "article");
+
+  const baslik = document.createElement("h2");
+  baslik.textContent = title;
+
+  const prgrf1 = document.createElement("p");
+  prgrf1.textContent = date;
+  prgrf1.setAttribute("class", "tarih");
+
+  const prgrf2 = document.createElement("p");
+  prgrf2.textContent = p1;
+
+  const prgrf3 = document.createElement("p");
+  prgrf3.textContent = p2;
+
+  const prgrf4 = document.createElement("p");
+  prgrf4.textContent = p3;
+
+  const btn1 = document.createElement("button");
+  btn1.setAttribute("class", "expandButton");
+  btn1.textContent = "+";
+
+  /* KODLAR BURAYA
   Adım 2: Hala `haberYapici` içindeyiz, button.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
+*/
+  btn1.addEventListener("click", (event) => {
+    div1.classList.toggle("article-open");
+  });
 
+  /*
   Adım 3: Fonksiyonunuzdan bir öğe döndürmeyi unutmayın.
+*/
+  div1.appendChild(baslik);
+  div1.appendChild(prgrf1);
+  div1.appendChild(prgrf2);
+  div1.appendChild(prgrf3);
+  div1.appendChild(prgrf4);
+  div1.appendChild(btn1);
 
+  return div1;
+}
+
+/*
   Adım 4: Fonksiyonunuzun dışında, tüm datayı döngüye sokun(loop). Bir div.article öğesi oluşturmak ve bunu div.articles içindeki DOM'a eklemek için
   her yinelemede oluşturduğunuz bileşeninizi kullanacaksınız(bknz. index.html).
+*/
+const articles = document.querySelector(".articles");
 
+data.forEach((news) => {
+  const card = haberYapici(
+    news.baslik,
+    news.prgrf1,
+    news.prgrf2,
+    news.prgrf3,
+    news.prgrf4
+  );
+
+  articles.append(card);
+});
+
+/*
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+data.push(
+  "yeni başlık",
+  "yeni tarih",
+  "yeni ilk paragraf",
+  "yeni ikinci paragraf",
+  "yeni ucuncu paragraf"
+);
